@@ -1,0 +1,543 @@
+* {
+	/*font-family: 'Roboto'*/;
+}
+
+html {font-size: 100.01%;}
+
+body {
+  /*font-size: 0.9em;*/
+  background-image: url("cartoon-moon.png");
+  background-attachment: fixed;
+  /*background-image: url("stellar.png");*/
+  background-repeat: repeat;
+  box-sizing: border-box;
+  margin:0;
+  padding: 5px;
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+}
+
+
+header {
+	width: 100%;
+  max-height: 15%;
+	color:#527a97;
+	/*border-bottom: 5px solid #333333;*/
+}
+
+header > h1 {
+  min-height:100%;
+  max-height:100%;
+  position: relative;
+  margin: 0 auto;
+	font-size: 5vw;
+  text-align: center;
+  /*color: #A89B9D;*/
+  font-family: 'Monoton',Impact, Charcoal, sans-serif;
+  text-decoration: underline;
+  letter-spacing: 0.025em;
+}
+
+/*header a {
+  display: none;
+}*/
+
+section {
+  overflow:hidden;
+  display: flex;
+  position: relative;
+}
+
+.clear{clear:both;}
+
+.icon{
+  display: none;
+}
+
+/* Navigation Menu */
+.sidebar {
+  min-height:100vh;
+  margin: 10px auto auto auto; 
+  background-color: rgba(245, 238, 158,.9);
+  border-radius: 15px;
+  border: 3px solid #A89B9D;
+  text-align: center;  
+  font-family: Courier New;
+  color: #333;
+  font-weight: 800;
+  position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+#show_mega_raffle_btn{
+  display: none;
+}
+
+/*#mega_raffle {
+
+}*/
+
+#mega_raffle > h2{
+  font-family: 'Bangers',Impact, Charcoal, sans-serif;
+  text-align: center;
+  font-size: 4vw;
+  letter-spacing: 0.15em;
+}
+
+#mega_raffle_btn {
+  width: 90%;
+  height: 100px;
+  margin-top: 5px;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+  color: #e8e8e8;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background: linear-gradient(45deg,#4CB944,green,#4CB944);
+  cursor: pointer;
+}
+
+
+.sidebar > ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+
+li a {
+  min-width: 100%;
+  color: #333;
+  display: block;
+  padding: 15px 0 15px 0;
+  margin-bottom: 20px;
+  letter-spacing: 0.1em;
+  font-family:  Courier New;
+  /*text-decoration: none;  */
+}
+
+li a.active {
+    /*background-color: #4CAF50;*/
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #4CB944;
+    color: white;
+}
+
+
+#withdraw_btn {
+  margin: 0 0 5px 5px;
+}
+
+
+/* Main section, contains all games */
+#game_container {
+  min-height: 100vh;
+  padding: 0px 20px 20px 20px;
+  margin-top: 10px auto auto auto;
+  text-align: center;
+  font-size: 1.3em;
+  overflow: auto;
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  flex: 4;
+
+}
+
+#result {
+  text-align: left;
+}
+
+#mega_tickets_to_use:invalid {
+  border: 2px dashed red;
+}
+
+
+/* Each separate raffle div */
+
+.game {
+  position: relative;
+  min-height: 325px;
+  min-width: 30%;
+  max-width: 30%;
+	padding: 10px;
+  border-radius: 15px;
+  border: 3px solid #A89B9D;
+  margin: 10px auto;
+  background-color: rgba(245, 238, 158,.9);
+  font-size: 85%;
+  font-family: Courier New, Charcoal, sans-serif;
+  font-weight: 800;
+  flex: 1;
+  color: #333333;
+}
+
+.price_banner {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  background: linear-gradient(45deg,green, #4CB944,green);
+  color: #333333;
+  font-family: Courier New, Charcoal, sans-serif;
+  font-size: 45px;
+  border-radius: 15px 15px 0px 0px;
+  letter-spacing: 0;
+}
+
+.end_expired_game_hint {
+  max-width: 100%;
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #fefefe;
+  padding:5px;
+  font-size: 15px;
+  letter-spacing: 0;
+  -webkit-animation-name: fadeIn;
+  -webkit-animation-duration: 0.6s;
+  animation-name: fadeIn;
+  animation-duration: 0.6s;
+
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+/* The Close Button */
+.end_expired_game_hint > .close {
+  position: absolute;
+  right: 2px;
+  top: 0;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.end_expired_game_hint > .close:hover,
+.end_expired_game_hint > .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.end_expired_game_btn {
+  background: linear-gradient(45deg,red,#660000,red);
+  border-radius: 25px;
+  color: #fefefe;
+}
+
+.end_expired_game_btn:focus {
+  outline: none;
+}
+
+
+/* The Modal (background) */
+
+.modal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 5%;  /*Location of the box */
+  padding-bottom: 5%
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  margin-left: -5px;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn;
+  -webkit-animation-duration: 0.6s;
+  animation-name: fadeIn;
+  animation-duration: 0.6s;
+}
+
+/* Modal Content */
+.modal-content {
+  display: none;
+  background-color: #f1f1f1;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 75vw;
+  text-align: center;
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  right: 5px;
+  top: 0;
+  color: white;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+
+@keyframes gradient {
+  25% {
+    background-position: 50% 0;
+  }
+}
+
+#player_info_modal > p > button {
+  width: 10%;
+  height: 50px;
+}
+
+.active, #player_info_modal > p > button:hover {
+    background-color: #666;
+    color: white;
+    outline: none;
+}
+
+#user_info_table * {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+/*******GAME HISTORY TABLE********/
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+
+
+
+/*EVERYTHING BELOW IS JUST FOR THE TICKET */
+
+.ticket {
+    backface-visibility: hidden;
+    position: relative;
+    display: inline-block;
+    padding: 3px 12px;
+    background-image:
+        radial-gradient( ellipse closest-side at 50%  50%, hsla(0, 0%, 100%, 0.10), transparent 90%),
+        radial-gradient( circle at 0    100%, transparent 8px, #f95029 5px),
+        radial-gradient( circle at 100% 100%, transparent 8px, #f95029 5px),
+        radial-gradient( circle at 100% 0, transparent 8px, #f95029 5px),
+        radial-gradient( circle at 0    0, transparent 8px, #f95029 5px);
+    background-position: center center, bottom left, bottom right, top right, top left;
+    background-size: cover, 51% 51%, 51% 51%, 51% 51%, 51% 51%;
+    background-repeat: no-repeat;
+    border-width: 0 1px;
+    border-color: transparent;
+    border-style: solid;
+    border-image: radial-gradient(cover circle, #fa616d 0%, #fa616d 50%, transparent 51%) 0 39% / 15px 4px repeat;
+    -webkit-filter: drop-shadow(hsla(0, 0%, 0%, 0.55) 1px 1px 2px);
+}
+
+.ticket > div {
+    width: 120px;
+    height: 60px;
+    box-sizing: border-box;
+    position:relative;
+    border-color: #1f1f1f;
+    border-style: solid;
+    border-width: 1.5px;
+    border-radius:5px;
+  	text-align:center;
+    font: 1.6em/1 Impact;
+  	text-transform:uppercase;
+  	padding:6px;
+  	font-stretch: extra-expanded; 	
+}
+
+.ticket > div:before,
+.ticket > div:after {
+	  content: attr(data-number);
+  	font: .55em/1 'Courier New';
+  	position: absolute;
+  	width: 58px;
+  	line-height: 15px;
+  	transform: rotate(90deg) translateZ(0) ;
+  	transform-origin: 0% 0%;
+  	text-align:center;
+  	display: block; 	
+  	top: 0;
+  	border-color: #1f1f1f;
+  	border-style: solid;
+  	border-width: 1.5px 0 0;
+}
+.ticket > div:before {
+	left: 20px;
+}
+
+.ticket > div:after {
+	transform-origin: 100% 0%;
+	right: 20px;
+	transform: rotate(-90deg) translateZ(0);
+}
+
+
+.ticket_button {
+  background: rgba(255,255,255,.0);
+  transition: 300ms;
+  border-style: none;
+}
+
+.ticket_button:hover {
+  background: rgba(255,255,255,.0);
+  cursor: pointer;
+  transition: 300ms;
+  color: #444;
+}
+
+.ticket_button:focus {
+  outline: none;
+}
+
+button:disabled,
+button[disabled]{
+  border-style: none; 
+  background: rgba(255,255,255,.0);
+}
+
+
+.mini_ticket {
+  transform: scale(.5);
+    font: .6em/1 Impact;
+}
+
+#game_template {
+  display:  none;
+}
+
+.help_button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .game {
+    max-width: 50%;
+    margin: 5px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  
+  body {
+    background-position: right;
+  }
+
+  header  h1 {
+    font-size: 35px;
+  }
+
+  header > a {
+    text-decoration: none;
+    flex:1;
+  }
+
+  .icon {
+    display: block;
+    font-size: 35px;
+  }
+
+  .sidebar {
+    display: none;
+    position: relative;
+  } 
+
+  .responsive {
+    display: block;
+    width: 75vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+  }
+
+  #menu.responsive {
+    left: 0;
+  }
+
+  #mega_raffle  * {
+    font-size: 100%;
+    letter-spacing: 0;
+  }
+
+  #mega_raffle.responsive {
+    right: 0;
+  }
+
+  #menu a {
+    display: block;
+    position: relative;
+  }
+
+  #game_container {
+    justify-content: center;
+  }
+   
+  .game {
+    min-width: 95%;
+    max-width: 95%
+    min-height: unset;
+  }
+
+
+  .ticket  div {
+    font: 1.4em/1 Impact;
+    line-height: 23px;
+  }
+}

@@ -1,0 +1,199 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+ 	<title>Raffle Man</title>
+	<link rel="shortcut icon" type="image/x-icon" href="ticket.jpg" />
+	<meta name="description"
+          content="Fast-Paced, de-centralized Ethereum lotteries. Live games with chatrooms, mini games, free games and more!"/>
+    <meta name="keywords"
+          content="Ether, gambling, games, Ethereum, wei, finney, ether, ethereum gambling, de-centralized, de-centralised, gamble, Dapp, Ðapp, provably, fair, provably fair, crypto-currency, cryptocurrency, crypto, crypto-currency, cryptocurrency, bitcoin"/>
+ 	<meta charset="utf-8"/>
+ 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+ 	<meta name="description" content="The Ethereum Raffle"/>
+ 	<meta name="author" content="EtherealGames"/>
+ 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 	<link href="https://fonts.googleapis.com/css?family=Bangers|Monoton" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+	<script src="LotteryContractABI.json"></script>
+	<script src="scripts.js"></script>
+	<script type="text/javascript">
+		function showMenu() {
+			var x = document.getElementById("menu");
+		    if (x.className === "sidebar") {
+		        x.className += " responsive";
+		    } else {
+		        x.className = "sidebar";
+		    }
+		}
+		function showMega() {
+			var x = document.getElementById("mega_raffle");
+		    if (x.className === "sidebar") {
+				showMenu();
+		        x.className += " responsive";
+		    } else {
+		        x.className = "sidebar";
+		    }
+		}
+	</script>
+</head>
+
+<body>
+	<header style="display: flex; flex-direction: row;">
+		<a href="#" style="flex: 0;" class="icon" onclick="showMenu()">&#9776;</a>
+		<h1 style="flex: 3">The Raffle Man</h1>
+		<a href="javascript:void(0);" style="flex: 0; "></a>
+	</header>
+	<section style="position: relative;">
+		<div class="sidebar" id="menu">
+		  <ul>
+			<li><a href="#" id="show_help_btn" onclick="showModals(this.id)">How To Play</a></li>
+			<li><a href="#" id="show_game_history_btn" onclick="showModals(this.id)">Game History</a></li>
+			<li><a href="#" id="show_smart_contract_btn" onclick="showModals(this.id)">Smart Contract</a></li>
+			<li><a href="#" id="show_player_info_btn" onclick="showModals(this.id)">Player Info</a></li>
+			<li><a href="#" id="show_mega_raffle_btn" onclick="showMega()">Mega Raffle</a></li>
+		  </ul>
+		</div>
+
+		<div id="game_container"></div>
+
+		<div class="sidebar" id="mega_raffle">
+			<h2>MEGA RAFFLE</h2>
+			<p>Grand Prize: <span id="mega_raffle_prize"></span></p>
+			<p>Next Drawing: <span id="mega_raffle_drawing"></span></p>
+			<p>Entries: <span id="mega_raffle_entries"></span></p>
+			<br/>
+			<br/>
+			<p>You Have <strong><span id="mega_tickets_available"></span></strong> Mega Raffle Tickets</p>
+			<label for="mega_tickets_to_use">Tickets to Use: </label>
+			<input type="number" id="mega_tickets_to_use" min="1"/>
+			<br/>
+			<button id="mega_raffle_btn" onclick="enterMegaRaffle()">Enter Mega Raffle</button>
+			<p id="mega_raffle_notice" style="color: red;display: none;"><strong>Next Entry Ends The Round</strong></p>
+			<p><sub>Play Games and Earn Tickets!</sub></p>
+		</div>
+	</section>
+
+	<div id="modal" class="modal clear">
+		<span class="close">&times;</span>
+		<div class="modal-content" id="how_to_play_modal">
+			<p>How To Play</p>
+			<div>
+				<img src="screenshot.png" style="float: left;" />
+				<div style="float: left; margin-left: 5px;">
+					<p>This is a single raffle game. Each ticket represents</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="modal-content" id="game_history_modal">
+			<p style="text-decoration: underline;">Game History</p>
+			<table id="game_history_table">
+				<tr>
+					<th>Block #</th>
+					<th>Game ID</th>
+					<th>Round #</th>
+					<th>Ticket #</th>
+					<th>Amount Won</th>
+					<th>Winner</th>
+				</tr>
+			</table>
+		</div>
+		<div class="modal-content" id="smart_contract_modal">
+			<p>Smart Contract</p>
+		</div>
+		<div class="modal-content" id="player_info_modal">
+			<table id="user_info_table">
+				<tr>
+					<th>Ethereum Address</th>
+					<th>Pending Withdrawals</th>
+					<th>Tickets Bought</th>
+					<th>Ether Wagered</th>
+					<th>Ether Won</th>
+				</tr>
+				<tr>
+					<td id="eth_address"></td>
+					<td id="pending_withdrawals"></td>
+					<td id="num_tickets_bought"></td>
+					<td id="eth_wagered"></td>
+					<td id="eth_won"></td>
+				</tr>
+			</table>
+			<p style="width: 100%; text-align: left;"><button id="withdraw_btn" onclick="withdrawEther()" style="left: 0;">Withdraw Now</button></p>
+			<br/>
+			<p style="text-decoration: underline;">Player History</p>
+			<p style="margin-bottom: -5px; min-width: 100%; text-align: left; position: relative;z-index:1;">
+				<button class='active' id="games_played_btn" onclick="changePlayerHistoryView(this.id)">Games Played</button><button id="games_won_btn" onclick="changePlayerHistoryView(this.id)">Games Won</button>
+			</p>
+			<div style="position: relative; z-index: 2;">
+				<table id="player_games_history_table">
+					<tr style="background: rgba(255,255,255,1);">
+						<th>Block #</th>
+						<th>Game ID</th>
+						<th>Round #</th>
+						<th>Ticket #</th>
+						<th>Price</th>
+					</tr>
+				</table>
+				<table id="player_win_history_table" style="display: none;">
+					<tr style="background: rgba(255,255,255,1);">
+						<th>Block #</th>
+						<th>Game ID</th>
+						<th>Round #</th>
+						<th>Ticket #</th>
+						<th>Amount Won</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div id="result" class="clear"></div>
+	<div class="game" id="game_template">
+		<h4 class="price_banner"></h4>
+		<div class="game_data" style="display: flex; flex-direction: column;">
+
+			<p style="display: flex; width: 100%; text-align: left;">
+				<span style="width:50%; flex:1">Max Prize: </span>
+				<span class="payout" style="width:50%; flex: 1"></span>
+			</p>
+			<p style="display: flex; width: 100%; text-align: left;">
+				<span style="width:50%; flex:1">Tickets Left: </span>
+				<span class="tickets_left" style="width:50%;flex: 1"></span>
+			</p>
+			<div style="position: relative;">
+				<p style="display: flex; width: 100%; text-align: left;">
+					<span style="width:50%; flex:1">Round Ends: </span>
+					<span style="width:50%; flex:1"><span class="expiration_date"></span>
+						<button class="help_button" onclick="showEndExpiredGameHint(this)">
+							<i class="fa fa-question-circle"></i>
+						</button>
+					</span>
+				</p>
+				<div class="end_expired_game_hint">
+					<span class="close">&times;</span>
+					<p>If the game has expired before filling up you can request a new random number be chosen in order to end the round.
+					</p>
+					<p>However, you can also continue playing as usual and the random number will be chosen automatically once the game fills up.</p>
+					<p>This <strong>can also be used</strong> if the response from Oraclize (random number oracle) fails.</p>
+					<p>There is a 5 minute lock period between random number requests</p>
+					<p><br/><sub>Note: The cost for a random number request is deducted from the game balance</sub></p>
+					<button class="end_expired_game_btn" onclick="endExpiredGame(this)"><h1>End Round</h1></button>				
+				</div>
+			</div>
+			<p style="display: flex; width: 100%; text-align: left;">
+				<span style="width:50%; flex:1">Mega Bonus: </span>
+				<span style="width:50%; flex:1" class="mega_raffle_bonus"></span>
+			</p>
+		</div>
+		<button class="ticket_button" style="display: none" onclick="buyTicket(this.parentNode)">
+			<div class="ticket">
+				<div data-number="198812">Enter<br/>Raffle</div>
+			</div>
+		</button>
+		<a class="etherscan_link" style="display: none;" target="_blank">etherscan.io</a>
+		<p style="position:absolute; bottom:-10px; left:0; font-size: 16px;">GameID: <span class="game_id"></span></p>
+		
+	</div>
+</body>
+</html>
