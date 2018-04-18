@@ -12,9 +12,8 @@
  	<meta name="viewport" content="width=device-width, initial-scale=1" />
  	<meta name="description" content="The Ethereum Raffle"/>
  	<meta name="author" content="EtherealGames"/>
- 	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- 	<link href="https://fonts.googleapis.com/css?family=Bangers|Monoton" rel="stylesheet">
+ 	<link href="https://fonts.googleapis.com/css?family=Roboto|Paytone+One|Bangers|Monoton" rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
 	<script src="LotteryContractABI.json"></script>
 	<script src="scripts.js"></script>
@@ -54,12 +53,20 @@
 			<li><a href="#" id="show_player_info_btn" onclick="showModals(this.id)">Player Info</a></li>
 			<li><a href="#" id="show_mega_raffle_btn" onclick="showMega()">Mega Raffle</a></li>
 		  </ul>
+		  <br/><br/>
+		  <div style="padding:3px; text-align: center;">
+		  	<h2>Daily Bonus<br/><sub style="font-size: small;">Play any game and earn...</sub></h2>
+		  	<hr style="width: 60%; border: 0;border-top: 1px solid black;">
+		  	<h2><strong><span id="daily_mega_award" style="font-size: 1.7em"></span></strong><br/><span style="font-size: 1.8em; font-family: 'Bangers',Impact, Charcoal, sans-serif;letter-spacing: 0.1em;">Mega Raffle</span> Tickets!</h2>
+		  </div>
 		</div>
 
 		<div id="game_container"></div>
 
 		<div class="sidebar" id="mega_raffle">
-			<h2>MEGA RAFFLE</h2>
+			<h2>MEGA RAFFLE<br/><sub>Play Games. Earn Tickets!</sub></h2>
+			<br/>
+			<br/>
 			<p>Grand Prize: <span id="mega_raffle_prize"></span></p>
 			<p>Next Drawing: <span id="mega_raffle_drawing"></span></p>
 			<p>Entries: <span id="mega_raffle_entries"></span></p>
@@ -71,24 +78,52 @@
 			<br/>
 			<button id="mega_raffle_btn" onclick="enterMegaRaffle()">Enter Mega Raffle</button>
 			<p id="mega_raffle_notice" style="color: red;display: none;"><strong>Next Entry Ends The Round</strong></p>
-			<p><sub>Play Games and Earn Tickets!</sub></p>
 		</div>
 	</section>
 
 	<div id="modal" class="modal clear">
 		<span class="close">&times;</span>
-		<div class="modal-content" id="how_to_play_modal">
-			<p>How To Play</p>
-			<div>
-				<img src="screenshot.png" style="float: left;" />
-				<div style="float: left; margin-left: 5px;">
-					<p>This is a single raffle game. Each ticket represents</p>
+		<div class="modal-content" id="accept_terms_modal">
+			<h4>Terms of use</h4>
+			<p>
+				By clicking ok or interacting with TheRaffleMan beyond these terms of use, you confirm that you are at least 18 years of age and you represent, warrant and agree to ensure that your use of our services will comply with all applicable laws, statutes and regulations. TheRaffleMan.fun does not intend to enable you to contravene applicable law. TheRaffleMan is not responsible for any illegal or unauthorized use of our services by you.
+			</p>
+			<button onclick="shouldShowHowToPlay()">OK</button>
+			<button onclick="window.location.href = 'http://www.google.com'">Exit</button>
+		</div>
+		<div class="modal-content" id="how_to_play_modal" style="background-color: #222; color: white">
+			<h1>How To Play</h1>
+			<div style="width: 60%; align-items: center; margin: 0 auto;">
+				<h2 style="color: #527a97">You are entering a raffle with other people where each is person assigned a ticket number. Once the raffle is full, a number is picked at random and the winner gets the entire game balance*. There is a winner every raffle.</h2>
+				<h2 style="color: #527a97">Earn tickets to the Mega Raffle by playing games!</h2>
+				<div style="text-align: left; ">
+					<div style="float: right; text-align: center; margin: 5px;">
+						<img src="screenshot.png"  style="width: 100%;" />
+						<h5>Each of these is a single raffle game.</h5>
+					</div>
+					<!-- <h1>But what does it all mean?</h1> -->
+					<p>The value in the <strong><span style="color:green;">green area</span></strong> is the price to enter the raffle.</p>
+					<p>
+						<span style="color: #527a97"><strong>Max Prize:</strong></span> the total amount that can be won if the raffle fills up (before oracle/house fees).
+					</p>
+					<p>
+						<span style="color: #527a97"><strong>Tickets Left:</strong></span> the number of tickets available before the game is sold out. Once the game is sold out a random number is automatically requested.
+					</p>
+					<p>
+						<span style="color: #527a97"><strong>Round Ends:</strong></span> this shows a time and date when the game expires and is eligible for a manual request for a random number to end the round. If expired and there is a need to end game early just press the question mark "<i class="fa fa-question-circle"></i>". 
+					</p>
+					<p>
+						<span style="color: #527a97"><strong>Mega Bonus:</strong></span> the number of Mega Raffle tickets awarded to the user for purchasing a ticket to the game.
+					</p>
+					<p>
+						<span style="color: #527a97"><strong>Buy Ticket Button:</strong></span> Click the button to enter the raffle of choice.
+					</p>
 				</div>
-				<div class="clear"></div>
+				<p style="color: #527a97"><sub>*There is an 8% commission in order to fund the Mega Raffle and other costs. Commission for some games may vary.</sub></p>
 			</div>
 		</div>
 		<div class="modal-content" id="game_history_modal">
-			<p style="text-decoration: underline;">Game History</p>
+			<h4 style="text-decoration: underline;">Game History</h4>
 			<table id="game_history_table">
 				<tr>
 					<th>Block #</th>
@@ -101,7 +136,7 @@
 			</table>
 		</div>
 		<div class="modal-content" id="smart_contract_modal">
-			<p>Smart Contract</p>
+			<h4>Smart Contract</h4>
 		</div>
 		<div class="modal-content" id="player_info_modal">
 			<table id="user_info_table">
@@ -122,9 +157,10 @@
 			</table>
 			<p style="width: 100%; text-align: left;"><button id="withdraw_btn" onclick="withdrawEther()" style="left: 0;">Withdraw Now</button></p>
 			<br/>
-			<p style="text-decoration: underline;">Player History</p>
+			<h4>Player History</h4>
 			<p style="margin-bottom: -5px; min-width: 100%; text-align: left; position: relative;z-index:1;">
-				<button class='active' id="games_played_btn" onclick="changePlayerHistoryView(this.id)">Games Played</button><button id="games_won_btn" onclick="changePlayerHistoryView(this.id)">Games Won</button>
+				<button class='active' id="games_played_btn" onclick="changePlayerHistoryView(this.id)">Games Played</button>
+				<button id="games_won_btn" onclick="changePlayerHistoryView(this.id)">Games Won</button>
 			</p>
 			<div style="position: relative; z-index: 2;">
 				<table id="player_games_history_table">
@@ -188,7 +224,7 @@
 		</div>
 		<button class="ticket_button" style="display: none" onclick="buyTicket(this.parentNode)">
 			<div class="ticket">
-				<div data-number="198812">Enter<br/>Raffle</div>
+				<div data-number="198812">Buy<br/>Ticket</div>
 			</div>
 		</button>
 		<a class="etherscan_link" style="display: none;" target="_blank">etherscan.io</a>

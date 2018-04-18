@@ -33,12 +33,12 @@ header > h1 {
   max-height:100%;
   position: relative;
   margin: 0 auto;
-	font-size: 5vw;
+	font-size: 6vw;
   text-align: center;
   /*color: #A89B9D;*/
-  font-family: 'Monoton',Impact, Charcoal, sans-serif;
-  text-decoration: underline;
-  letter-spacing: 0.025em;
+  font-family: 'Paytone One','Monoton',Impact, Charcoal, sans-serif;
+  /*text-decoration: underline;*/
+  /*letter-spacing: 0.025em;*/
 }
 
 /*header a {
@@ -89,6 +89,12 @@ section {
   text-align: center;
   font-size: 4vw;
   letter-spacing: 0.15em;
+}
+
+#mega_raffle h2 sub {
+  font-family: Courier New;
+  font-size: small;
+  letter-spacing: normal;
 }
 
 #mega_raffle_btn {
@@ -171,7 +177,8 @@ li a:hover:not(.active) {
 
 .game {
   position: relative;
-  min-height: 325px;
+  min-height: 20%;
+  max-height: 50%;
   min-width: 30%;
   max-width: 30%;
 	padding: 10px;
@@ -277,8 +284,13 @@ li a:hover:not(.active) {
   border-radius: 5px;
   width: 75vw;
   text-align: center;
+  overflow: auto;
 }
 
+#accept_terms_modal {
+  display: block;
+  width: 50vw;
+}
 /* The Close Button */
 .close {
   position: absolute;
@@ -516,6 +528,10 @@ button[disabled]{
     letter-spacing: 0;
   }
 
+  #mega_raffle h2 {
+    font-size: 2em;
+  }
+
   #mega_raffle.responsive {
     right: 0;
   }
@@ -530,14 +546,17 @@ button[disabled]{
   }
    
   .game {
+    min-height: 35%;
+    max-height: 55%;
     min-width: 95%;
     max-width: 95%
     min-height: unset;
   }
 
-
   .ticket  div {
     font: 1.4em/1 Impact;
     line-height: 23px;
   }
+
+
 }

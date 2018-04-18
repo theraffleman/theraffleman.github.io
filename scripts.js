@@ -1,3 +1,4 @@
+/* Game class stores and manages all cached games */
 class Game {
   constructor(gameData){
     for (var key in gameData) {
@@ -66,7 +67,7 @@ class Game {
     this._gameDiv.getElementsByClassName('tickets_left')[0].innerHTML = ticketsLeft + "/" + this.maxParticipants;
     this._gameDiv.getElementsByClassName('price_banner')[0].textContent = entryPrice;
     this._gameDiv.getElementsByClassName('expiration_date')[0].textContent = drawingDate;
-    this._gameDiv.getElementsByClassName('mega_raffle_bonus')[0].textContent = megaRaffleBonus + (megaRaffleBonus > 1 ? " Tickets" : " Ticket");
+    this._gameDiv.getElementsByClassName('mega_raffle_bonus')[0].textContent = megaRaffleBonus + " Ticket" + (megaRaffleBonus == 1 ? "" : "s");
 
     var buyTicketButton = this._gameDiv.getElementsByClassName('ticket_button')[0];
 
@@ -107,6 +108,9 @@ var megaRaffle;
 
 /*  Loads the web3 context  */
 window.addEventListener('load', function() {
+  // document.getElementById('modal').style.display = "block";
+  // document.getElementById('accept_terms_modal').display = 'block';
+
   currentNetwork = null;
 
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
@@ -148,8 +152,10 @@ window.addEventListener('load', function() {
   lotteryContract = web3js.eth.contract(contractABI);
   lottery = lotteryContract.at(address);
 
+  showModals('accept_terms_modal');
   loadAllGames();
   displayUserInfo();
+  getDailyMegaAward();
 
   // Get the main modal
   var modal = document.getElementById("modal");
@@ -165,7 +171,6 @@ window.addEventListener('load', function() {
 
     // close any open modals
     if (event.target == modal) {
-      modal.style.display = "none";
       clearAllModals();
     }
 
@@ -307,6 +312,30 @@ function displayMegaRaffle() {
 }
 
 
+// checks the daily award for participating in any raffle
+function getDailyMegaAward() {
+  lottery.dailyTicketAward( function(error, result){
+    if(error){
+      console.error(error);
+      return;
+    }
+    var val = web3js.fromWei(String(result.toNumber()), 'ether');
+    document.getElementById('daily_mega_award').textContent = val; // + " Mega Raffle Ticket" + (Number(val) == 1?"":"s") + "!";
+  });
+}
+
+function shouldShowHowToPlay(){
+  clearAllModals();
+
+  // lottery.getLastTicketPurchaseTime( function(error, result){
+  //   if(error){
+  //     console.error(error);
+  //     return;
+  //   }
+  //   if (result.toNumber() == 0)
+  //     showModals('show_help_btn');
+  // });
+}
 
 /*****************
   Raffle contract functions
@@ -390,8 +419,10 @@ function enterMegaRaffle() {
       }
 
       waitForReceipt(result, function(receipt){
-        console.log(receipt);
-        displayMegaRaffle();
+        getGameData(0, function(gameData){
+          megaRaffle = gameData;
+          displayMegaRaffle();
+        });
       });
     });
   });
@@ -467,7 +498,8 @@ function getRandomNumber(gameID, cb){
   
   lottery.getRandomNumber.estimateGas(gameID, callData, function(error, result){
     if (error){
-      console.log(error);
+      console.log("gas estimate error");
+      alert('A random number was just requested. Please wait.');
       return;
     }
     // add gas estimate to callData
@@ -480,44 +512,13 @@ function getRandomNumber(gameID, cb){
       cb(result);
     });
   });
-
-  // lottery.changeOraclizeCallbackGasLimit.sendTransaction(500000, function(error, result){
-  //   console.log(result);
-  // });
 }
 
-/* Returns the labels for the return values */
-function getReturnValueLabels(methodName){
-  var returnLabels = [];  
-  contractABI.forEach(function(element){
-    if(element['name'] === methodName){
-      element['outputs'].forEach(output => returnLabels.push(output['name']));
-    }
-  });
-  return returnLabels;
-}
-
-/* 
-  Retrieves the game info, packs it into a JSON object with the proper 
-  labels and uses the callback to process the result for the game 
-*/
-function getGameData(_gameID, callback){
-  var labels = getReturnValueLabels('showGameInfo');
-  var res = lottery.showGameInfo(_gameID, function(error, result){
-    if(error){
-      console.log(error);
-      return;
-    }
-    var resultsObj = {};
-    result.forEach((e, i) => resultsObj[labels[i]] = e);
-    callback(resultsObj);
-  });  
-}
 
 /* Shows the appropriate modal when the corresponding button is clicked */
-function showModals(clicked_id){
+function showModals(clicked_or_id){
   document.getElementById('modal').style.display = "block";
-  switch (clicked_id){
+  switch (clicked_or_id){
     case "show_help_btn":
       document.getElementById("how_to_play_modal").style.display ="block";
       break;
@@ -531,12 +532,17 @@ function showModals(clicked_id){
     case "show_player_info_btn":
       document.getElementById("player_info_modal").style.display ="block";
       getPlayerHistory();
+    case 'accept_terms_modal':
+      break;
+    default:
+      document.getElementById(clicked_or_id).style.display = "block";
       break;
   }
 }
 
 /* Hides all the unused modals */
 function clearAllModals(){
+  modal.style.display = "none";
   var modals = document.getElementsByClassName("modal-content");
   for (var i = 0; i < modals.length; i++){
     modals[i].style.display = "none";
@@ -557,6 +563,10 @@ function showEndExpiredGameHint(node){
 */
 var lastBlockSearch = 0;
 function getGameHistory(){
+
+  // Eventually limit history length
+  // lastBlockSearch = web3.eth.blockNumber - 100000;
+
   var gameHistoryTable = document.getElementById("game_history_table");
   var foundWinnerEvent = lottery.LogFoundWinner({},{fromBlock: lastBlockSearch, toBlock: 'latest'})
   
@@ -611,7 +621,7 @@ function getPlayerHistory(){
 
     var link = "http://"+ (currentNetwork=="mainnet"?"":currentNetwork+".")+"etherscan.io/tx/"+result.transactionHash;
     var tr = gameHistoryTable.insertRow(1);
-    tr.innerHTML += "<td><a target='_blank' href='"+link+"'>" + result.blockNumber + "</a></td>" +
+    tr.innerHTML = "<td><a target='_blank' href='"+link+"'>" + result.blockNumber + "</a></td>" +
                     "<td>" + result.args.gameID.toNumber() + "</td>" +
                     "<td>" + result.args.roundNumber + "</td>" + 
                     "<td>" + result.args.ticketPosition + "</td>" +
@@ -635,7 +645,7 @@ function getPlayerHistory(){
 
     var link = "http://"+ (currentNetwork=="mainnet"?"":currentNetwork+".")+"etherscan.io/tx/"+result.transactionHash;
     var tr = winHistoryTable.insertRow(1);
-    tr.innerHTML += "<td><a href="+link+">" + result.blockNumber + "</a></td>" +
+    tr.innerHTML = "<td><a href="+link+">" + result.blockNumber + "</a></td>" +
                     "<td>" + result.args.gameID.toNumber() + "</td>" +
                     "<td>" + result.args.roundNumber + "</td>" + 
                     "<td>" + result.args.winningPosition + "</td>" +
@@ -663,36 +673,32 @@ function changePlayerHistoryView(nodeID){
   }
 }
 
-/*
-  Waits for a receipt verifying transaction was mined
-*/
-function waitForReceipt(hash, callback) {
-  console.log(hash);
-  web3.eth.getTransactionReceipt(hash, function (err, receipt) {
-    if (err) {
-      error(err);
-    }
 
-    if (receipt !== null) {
-      // Transaction went through
-      if (callback) {
-        callback(receipt);
-      }
-    } else {
-      // Try again in 1 second
-      window.setTimeout(function () {
-        waitForReceipt(hash, callback);
-      }, 1000);
+/* 
+  Retrieves the game info, packs it into a JSON object with the proper 
+  labels and uses the callback to process the result for the game 
+*/
+function getGameData(_gameID, callback){
+  var labels = getReturnValueLabels('showGameInfo');
+  var res = lottery.showGameInfo(_gameID, function(error, result){
+    if(error){
+      console.log(error);
+      return;
     }
-  });
+    var resultsObj = {
+
+    };
+    result.forEach((e, i) => resultsObj[labels[i]] = e);
+    callback(resultsObj);
+  });  
 }
 
 /*
   Checks for foundWinnerEvents and ticketSoldEvents in order to update game data
 */
 function pollForEvents(){
-  var foundWinnerEvent = lottery.LogFoundWinner(/*{_winner: 'winner', _gameID: 'gameID', amountWon: 'amountWon'}*/);
-  var ticketBoughtEvent = lottery.LogTicketSold(/*{_gameID:'gameID'}*/);
+  var foundWinnerEvent = lottery.LogFoundWinner();
+  var ticketBoughtEvent = lottery.LogTicketSold();
 
   // When a winner is found for a given raffle
   foundWinnerEvent.watch(function(error, result){
@@ -734,3 +740,39 @@ function pollForEvents(){
   });
 
 }
+
+/*
+  Waits for a receipt verifying transaction was mined
+*/
+function waitForReceipt(hash, callback) {
+  console.log(hash);
+  web3.eth.getTransactionReceipt(hash, function (err, receipt) {
+    if (err) {
+      error(err);
+    }
+
+    if (receipt !== null) {
+      // Transaction went through
+      if (callback) {
+        callback(receipt);
+      }
+    } else {
+      // Try again in 1 second
+      window.setTimeout(function () {
+        waitForReceipt(hash, callback);
+      }, 1000);
+    }
+  });
+}
+
+/* Returns the labels for the return values */
+function getReturnValueLabels(methodName){
+  var returnLabels = [];  
+  contractABI.forEach(function(element){
+    if(element['name'] === methodName){
+      element['outputs'].forEach(output => returnLabels.push(output['name']));
+    }
+  });
+  return returnLabels;
+}
+
