@@ -52,14 +52,14 @@ class Game {
     // If expired, allow user to get random number for that raffle
     // If more than one day left, print date
     // If less than one day, print time
-    var isToday = drawingDate.getDate() == new Date(now).getDate();
+    // var isToday = drawingDate.getDate() == new Date(now).getDate();
     if(diffDays <= 0){
       this._gameDiv.getElementsByClassName('help_button')[0].style.display = "inline";
       drawingDate = "Expired";
-    }else if(diffDays < 1 && isToday){
-      drawingDate = drawingDate.toLocaleString().substr(10, drawingDate.toLocaleString().length);
-    } else {
+    }else if(diffDays > 1){
       drawingDate = drawingDate.toLocaleString().substr(0,9);
+    } else {
+      drawingDate = drawingDate.toLocaleString().substr(10, drawingDate.toLocaleString().length);
     }
 
     // change div data
