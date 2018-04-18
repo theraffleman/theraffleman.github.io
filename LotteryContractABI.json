@@ -1,178 +1,26 @@
-address = "0x989fb9169a1a436998484056f0d42f81e3a7343e";  
+address = "0x62ac214118f8dddf182e1891e36a0490a064fbdb";  
 contractABI = [
   {
-    "constant": false,
+    "anonymous": false,
     "inputs": [
       {
-        "name": "_gameID",
-        "type": "uint256"
+        "indexed": true,
+        "name": "_owner",
+        "type": "address"
       },
       {
-        "name": "_pct",
-        "type": "uint256"
-      }
-    ],
-    "name": "setGameWinnerPercentage",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "name",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_pct",
-        "type": "uint256"
-      }
-    ],
-    "name": "setDefaultWinnerPercentage",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_gameID",
-        "type": "uint256"
-      },
-      {
-        "name": "_pct",
-        "type": "uint256"
-      }
-    ],
-    "name": "setGameMegaRafflePercentage",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
+        "indexed": true,
         "name": "_spender",
         "type": "address"
       },
       {
+        "indexed": false,
         "name": "_value",
         "type": "uint256"
       }
     ],
-    "name": "approve",
-    "outputs": [
-      {
-        "name": "success",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_gameID",
-        "type": "uint256"
-      },
-      {
-        "name": "_newBonus",
-        "type": "uint256"
-      }
-    ],
-    "name": "setGameBonus",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_price",
-        "type": "uint256"
-      }
-    ],
-    "name": "setTransferPrice",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "totalSupply",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_from",
-        "type": "address"
-      },
-      {
-        "name": "_to",
-        "type": "address"
-      },
-      {
-        "name": "_value",
-        "type": "uint256"
-      }
-    ],
-    "name": "transferFrom",
-    "outputs": [
-      {
-        "name": "success",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_pct",
-        "type": "uint256"
-      }
-    ],
-    "name": "setDefaultMegaRafflePercentage",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "name": "Approval",
+    "type": "event"
   },
   {
     "constant": false,
@@ -190,20 +38,6 @@ contractABI = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "decimals",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -230,57 +64,11 @@ contractABI = [
   },
   {
     "constant": false,
-    "inputs": [
-      {
-        "name": "_gameID",
-        "type": "uint256"
-      },
-      {
-        "name": "_newTTL",
-        "type": "uint256"
-      }
-    ],
-    "name": "setTimeToLive",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
     "inputs": [],
-    "name": "withdraw",
+    "name": "acceptOwnership",
     "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_newGasPrice",
-        "type": "uint256"
-      }
-    ],
-    "name": "setOraclizeCallbackGasPrice",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "megaRaffleTicketPrice",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -318,28 +106,46 @@ contractABI = [
     "constant": false,
     "inputs": [
       {
-        "name": "_gameID",
+        "name": "_spender",
+        "type": "address"
+      },
+      {
+        "name": "_value",
         "type": "uint256"
       }
     ],
-    "name": "fundRaffle",
+    "name": "approve",
+    "outputs": [
+      {
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "boom",
     "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "constant": false,
     "inputs": [
       {
-        "name": "_newLockTime",
+        "name": "_numTickets",
         "type": "uint256"
       }
     ],
-    "name": "setRandomNumberLockTime",
+    "name": "buyMegaRaffleTickets",
     "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
+    "payable": true,
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -369,208 +175,8 @@ contractABI = [
         "type": "uint256"
       }
     ],
-    "name": "buyMegaRaffleTickets",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_ticketAward",
-        "type": "uint256"
-      }
-    ],
-    "name": "setDailyTicketAward",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "decimalFactor",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_owner",
-        "type": "address"
-      }
-    ],
-    "name": "balanceOf",
-    "outputs": [
-      {
-        "name": "balance",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "acceptOwnership",
-    "outputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_numTickets",
-        "type": "uint256"
-      }
-    ],
     "name": "enterMegaLotto",
     "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "transferPrice",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "dailyTicketAward",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "owner",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "symbol",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "randomNumberLockTime",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "allowTransfer",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_additionalTickets",
-        "type": "uint256"
-      }
-    ],
-    "name": "mint",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [],
-    "name": "boom",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_to",
-        "type": "address"
-      },
-      {
-        "name": "_value",
-        "type": "uint256"
-      }
-    ],
-    "name": "transfer",
-    "outputs": [
-      {
-        "name": "success",
-        "type": "bool"
-      }
-    ],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
@@ -597,6 +203,20 @@ contractABI = [
         "type": "uint256"
       }
     ],
+    "name": "fundRaffle",
+    "outputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_gameID",
+        "type": "uint256"
+      }
+    ],
     "name": "getRandomNumber",
     "outputs": [],
     "payable": true,
@@ -604,17 +224,77 @@ contractABI = [
     "type": "function"
   },
   {
-    "constant": true,
-    "inputs": [],
-    "name": "getPendingWithdrawals",
-    "outputs": [
+    "constant": false,
+    "inputs": [
       {
-        "name": "",
+        "name": "_additionalTickets",
         "type": "uint256"
       }
     ],
+    "name": "mint",
+    "outputs": [],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_player",
+        "type": "address"
+      },
+      {
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "sendRefund",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_ticketAward",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDailyTicketAward",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_pct",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDefaultMegaRafflePercentage",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_pct",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDefaultWinnerPercentage",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -623,265 +303,35 @@ contractABI = [
       {
         "name": "_gameID",
         "type": "uint256"
-      }
-    ],
-    "name": "toggleGame",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_newGasLimit",
-        "type": "uint256"
-      }
-    ],
-    "name": "setOraclizeCallbackGasLimit",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "newOwner",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "_owner",
-        "type": "address"
       },
       {
-        "name": "_spender",
-        "type": "address"
-      }
-    ],
-    "name": "allowance",
-    "outputs": [
-      {
-        "name": "remaining",
+        "name": "_newBonus",
         "type": "uint256"
       }
     ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "_newOwner",
-        "type": "address"
-      }
-    ],
-    "name": "transferOwnership",
+    "name": "setGameBonus",
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "constant": true,
+    "constant": false,
     "inputs": [
       {
         "name": "_gameID",
         "type": "uint256"
+      },
+      {
+        "name": "_pct",
+        "type": "uint256"
       }
     ],
-    "name": "showGameInfo",
-    "outputs": [
-      {
-        "name": "gameID",
-        "type": "uint256"
-      },
-      {
-        "name": "roundNumber",
-        "type": "uint256"
-      },
-      {
-        "name": "maxParticipants",
-        "type": "uint256"
-      },
-      {
-        "name": "currentParticipantCount",
-        "type": "uint256"
-      },
-      {
-        "name": "entryPrice",
-        "type": "uint256"
-      },
-      {
-        "name": "megaBonus",
-        "type": "uint256"
-      },
-      {
-        "name": "balance",
-        "type": "uint256"
-      },
-      {
-        "name": "isActive",
-        "type": "bool"
-      },
-      {
-        "name": "lastQueryTime",
-        "type": "uint256"
-      },
-      {
-        "name": "timeToLive",
-        "type": "uint256"
-      },
-      {
-        "name": "expirationDate",
-        "type": "uint256"
-      },
-      {
-        "name": "participants",
-        "type": "address[]"
-      }
-    ],
+    "name": "setGameMegaRafflePercentage",
+    "outputs": [],
     "payable": false,
-    "stateMutability": "view",
+    "stateMutability": "nonpayable",
     "type": "function"
-  },
-  {
-    "inputs": [],
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "constructor"
-  },
-  {
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "fallback"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "name": "gameID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "roundNumber",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "ticketPosition",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "name": "LogTicketSold",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "gameID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "roundNumber",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "name": "winner",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "winningPosition",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "amountWon",
-        "type": "uint256"
-      }
-    ],
-    "name": "LogFoundWinner",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "user",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "name": "roundNumber",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "numTickets",
-        "type": "uint256"
-      }
-    ],
-    "name": "LogEnteredMegaRaffle",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "gameID",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "roundNumber",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "name": "winner",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "amountPaid",
-        "type": "uint256"
-      }
-    ],
-    "name": "LogPayout",
-    "type": "event"
   },
   {
     "anonymous": false,
@@ -915,84 +365,21 @@ contractABI = [
     "inputs": [
       {
         "indexed": true,
-        "name": "user",
+        "name": "_from",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "_to",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "amountWithdrawn",
+        "name": "_value",
         "type": "uint256"
       }
     ],
-    "name": "LogWithdrawal",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "user",
-        "type": "address"
-      }
-    ],
-    "name": "LogNewUserAdded",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "gameID",
-        "type": "uint256"
-      }
-    ],
-    "name": "LogGameCreated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "gameID",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "name": "roundNumber",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "randomNumber",
-        "type": "uint256"
-      }
-    ],
-    "name": "LogNewRandomNumber",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "name": "gameID",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "name": "roundNumber",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "name": "msg",
-        "type": "string"
-      }
-    ],
-    "name": "LogFailedQuery",
+    "name": "Transfer",
     "type": "event"
   },
   {
@@ -1044,21 +431,26 @@ contractABI = [
     "inputs": [
       {
         "indexed": true,
-        "name": "_from",
-        "type": "address"
+        "name": "gameID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "roundNumber",
+        "type": "uint256"
       },
       {
         "indexed": true,
-        "name": "_to",
+        "name": "winner",
         "type": "address"
       },
       {
         "indexed": false,
-        "name": "_value",
+        "name": "amountPaid",
         "type": "uint256"
       }
     ],
-    "name": "Transfer",
+    "name": "LogPayout",
     "type": "event"
   },
   {
@@ -1066,21 +458,701 @@ contractABI = [
     "inputs": [
       {
         "indexed": true,
-        "name": "_owner",
+        "name": "user",
         "type": "address"
       },
       {
         "indexed": true,
-        "name": "_spender",
+        "name": "roundNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "numTickets",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogEnteredMegaRaffle",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "gameID",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "roundNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "msg",
+        "type": "string"
+      }
+    ],
+    "name": "LogFailedQuery",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "gameID",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "roundNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "randomNumber",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogNewRandomNumber",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "gameID",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogGameCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "gameID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "roundNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "name": "winner",
         "type": "address"
       },
       {
         "indexed": false,
+        "name": "winningPosition",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "amountWon",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogFoundWinner",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "gameID",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "roundNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "ticketPosition",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "price",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogTicketSold",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "LogNewUserAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amountWithdrawn",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogWithdrawal",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "etherRefunded",
+        "type": "uint256"
+      }
+    ],
+    "name": "LogRefundSent",
+    "type": "event"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_gameID",
+        "type": "uint256"
+      },
+      {
+        "name": "_pct",
+        "type": "uint256"
+      }
+    ],
+    "name": "setGameWinnerPercentage",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newGasLimit",
+        "type": "uint256"
+      }
+    ],
+    "name": "setOraclizeCallbackGasLimit",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newGasPrice",
+        "type": "uint256"
+      }
+    ],
+    "name": "setOraclizeCallbackGasPrice",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newLockTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "setRandomNumberLockTime",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_gameID",
+        "type": "uint256"
+      },
+      {
+        "name": "_newTTL",
+        "type": "uint256"
+      }
+    ],
+    "name": "setTimeToLive",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_price",
+        "type": "uint256"
+      }
+    ],
+    "name": "setTransferPrice",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_gameID",
+        "type": "uint256"
+      }
+    ],
+    "name": "toggleGame",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_to",
+        "type": "address"
+      },
+      {
         "name": "_value",
         "type": "uint256"
       }
     ],
-    "name": "Approval",
-    "type": "event"
+    "name": "transfer",
+    "outputs": [
+      {
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_from",
+        "type": "address"
+      },
+      {
+        "name": "_to",
+        "type": "address"
+      },
+      {
+        "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "name": "transferFrom",
+    "outputs": [
+      {
+        "name": "success",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
+    "inputs": [],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "constructor"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "withdraw",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_owner",
+        "type": "address"
+      },
+      {
+        "name": "_spender",
+        "type": "address"
+      }
+    ],
+    "name": "allowance",
+    "outputs": [
+      {
+        "name": "remaining",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "allowTransfer",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_owner",
+        "type": "address"
+      }
+    ],
+    "name": "balanceOf",
+    "outputs": [
+      {
+        "name": "balance",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "dailyTicketAward",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "decimalFactor",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "decimals",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getLastTicketPurchaseTime",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "getPendingWithdrawals",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "megaRaffleTicketPrice",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "name",
+    "outputs": [
+      {
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "newOwner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "randomNumberLockTime",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_gameID",
+        "type": "uint256"
+      }
+    ],
+    "name": "showExtraGameInfo",
+    "outputs": [
+      {
+        "name": "roundNumber",
+        "type": "uint256"
+      },
+      {
+        "name": "megaRafflePercentage",
+        "type": "uint256"
+      },
+      {
+        "name": "participants",
+        "type": "address[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "_gameID",
+        "type": "uint256"
+      }
+    ],
+    "name": "showGameInfo",
+    "outputs": [
+      {
+        "name": "gameID",
+        "type": "uint256"
+      },
+      {
+        "name": "maxParticipants",
+        "type": "uint256"
+      },
+      {
+        "name": "currentParticipantCount",
+        "type": "uint256"
+      },
+      {
+        "name": "entryPrice",
+        "type": "uint256"
+      },
+      {
+        "name": "megaBonus",
+        "type": "uint256"
+      },
+      {
+        "name": "balance",
+        "type": "uint256"
+      },
+      {
+        "name": "isActive",
+        "type": "bool"
+      },
+      {
+        "name": "lastQueryTime",
+        "type": "uint256"
+      },
+      {
+        "name": "timeToLive",
+        "type": "uint256"
+      },
+      {
+        "name": "expirationDate",
+        "type": "uint256"
+      },
+      {
+        "name": "winnerPercentage",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "symbol",
+    "outputs": [
+      {
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "totalSupply",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "transferPrice",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
   }
 ];

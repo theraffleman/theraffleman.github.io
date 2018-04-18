@@ -76,7 +76,7 @@ class Game {
       this._gameDiv.innerHTML += "<h3>Game Disabled</h3>";
     else if(ticketsLeft > 0)
       if(this.waitingForReceipt){
-        var etherscanLink = gameDiv.getElementsByClassName('etherscan_link')[0];
+        var etherscanLink = this._gameDiv.getElementsByClassName('etherscan_link')[0];
         etherscanLink.style.display = "block";
         etherscanLink.href = "https://"+currentNetwork+".etherscan.io/tx/"+this.tx;
       } else 
@@ -327,14 +327,14 @@ function getDailyMegaAward() {
 function shouldShowHowToPlay(){
   clearAllModals();
 
-  // lottery.getLastTicketPurchaseTime( function(error, result){
-  //   if(error){
-  //     console.error(error);
-  //     return;
-  //   }
-  //   if (result.toNumber() == 0)
-  //     showModals('show_help_btn');
-  // });
+  lottery.getLastTicketPurchaseTime( function(error, result){
+    if(error){
+      console.error(error);
+      return;
+    }
+    if (result.toNumber() == 0)
+      showModals('show_help_btn');
+  });
 }
 
 /*****************
