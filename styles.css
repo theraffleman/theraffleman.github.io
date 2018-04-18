@@ -546,8 +546,8 @@ button[disabled]{
   }
    
   .game {
-    min-height: 35%;
-    max-height: 55%;
+    min-height: 40vh;
+    max-height: 55vh;
     min-width: 95%;
     max-width: 95%
     min-height: unset;
